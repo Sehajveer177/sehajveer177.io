@@ -2,31 +2,73 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>La tua posizione attuale</title>
+  <title>Scopri dove sei!</title>
   <style>
+    /* ANIMAZIONE SFONDO */
     body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb);
+      background-size: 400% 400%;
+      animation: gradient 12s ease infinite;
+      text-align: center;
     }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px #00000055;
+    }
+
     #location {
-      font-size: 1.2em;
-      margin-top: 20px;
+      font-size: 1.3em;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 2px solid #ffffff88;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 90%;
+      backdrop-filter: blur(6px);
     }
+
     button {
-      margin-top: 15px;
-      padding: 10px 20px;
+      background-color: #ffffffaa;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      padding: 15px 25px;
       font-size: 1em;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #fff;
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
-  <h1>Scopri dove ti trovi</h1>
+  <h1>Scopri dove ti trovi!</h1>
+
   <button onclick="getLocation()">Mostra la mia posizione</button>
   <div id="location">Premi il pulsante per vedere la tua posizione.</div>
 
-  <br><br>
-
-  <button onclick="window.open('https://www.youtube.com/watch?v=VdEDY-SwL-ChS6FI', '_blank')">
+  <button onclick="window.open('https://www.youtube.com/watch?v=r5_NvFTfAWc', '_blank')">
     Clicca su di me
   </button>
 
@@ -39,14 +81,14 @@
           (position) => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
-            locationDiv.innerHTML = `La tua posizione è: <br>Latitudine: ${lat.toFixed(6)}<br>Longitudine: ${lon.toFixed(6)}`;
+            locationDiv.innerHTML = `📍 La tua posizione è:<br>🌐 Latitudine: ${lat.toFixed(6)}<br>🌐 Longitudine: ${lon.toFixed(6)}`;
           },
           (error) => {
-            locationDiv.innerHTML = "Impossibile ottenere la posizione: " + error.message;
+            locationDiv.innerHTML = "⚠️ Impossibile ottenere la posizione: " + error.message;
           }
         );
       } else {
-        locationDiv.innerHTML = "Il tuo browser non supporta la geolocalizzazione.";
+        locationDiv.innerHTML = "❌ Il tuo browser non supporta la geolocalizzazione.";
       }
     }
   </script>
