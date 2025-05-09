@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>La tua posizione attuale</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    #location {
+      font-size: 1.2em;
+      margin-top: 20px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Scopri dove ti trovi</h1>
+  <button onclick="getLocation()">Mostra la mia posizione</button>
+  <div id="location">Premi il pulsante per vedere la tua posizione.</div>
+
+  <br><br>
+
+  <button onclick="window.open('https://www.youtube.com/watch?v=VdEDY-SwL-ChS6FI', '_blank')">
+    Clicca su di me
+  </button>
+
+  <script>
+    function getLocation() {
+      const locationDiv = document.getElementById("location");
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            locationDiv.innerHTML = `La tua posizione è: <br>Latitudine: ${lat.toFixed(6)}<br>Longitudine: ${lon.toFixed(6)}`;
+          },
+          (error) => {
+            locationDiv.innerHTML = "Impossibile ottenere la posizione: " + error.message;
+          }
+        );
+      } else {
+        locationDiv.innerHTML = "Il tuo browser non supporta la geolocalizzazione.";
+      }
+    }
+  </script>
+</body>
+</html>
